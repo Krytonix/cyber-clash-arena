@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Clash Arena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- CRT Effect Overlay -->
+        
+        <!-- Main Menu -->
+        <div id="mainMenu" class="screen active">
+            <h1 class="game-title">CYBER CLASH ARENA</h1>
+            <div class="menu-buttons">
+                <button id="localBtn" class="cyber-button">LOCAL GAME</button>
+                <button id="onlineBtn" class="cyber-button">ONLINE GAME</button>
+                <button id="controlsBtn" class="cyber-button">CONTROLS</button>
+            </div>
+        </div>
+
+        <!-- P2P Online Menu -->
+        <div id="p2pMenu" class="screen">
+            <h2 class="cyber-title">ONLINE P2P</h2>
+            <div class="p2p-menu-content">
+                <button id="p2pHostBtn" class="cyber-button">HOST GAME</button>
+                <button id="p2pJoinBtn" class="cyber-button">JOIN GAME</button>
+                <p style="margin-top: 1rem; color: #888; text-align: center;">
+                    For best results, both players on same WiFi
+                </p>
+            </div>
+            <button id="p2pBackBtn" class="cyber-button small">BACK</button>
+        </div>
+
+        <!-- Controls -->
+        <div id="controlsScreen" class="screen">
+            <h2 class="cyber-title">CONTROLS</h2>
+            <div class="controls-grid">
+                <div class="player-controls">
+                    <h3 class="neon-blue">PLAYER 1 / YOU</h3>
+                    <p>W/A/S/D - Move/Jump</p><p>F - Attack</p><p>G - Special</p><p>SPACE - Block</p>
+                </div>
+                <div class="player-controls">
+                    <h3 class="neon-cyan">PLAYER 2 / OPPONENT</h3>
+                    <p>Local: Arrow Keys, , . ENTER</p><p>Online: Controlled remotely</p>
+                </div>
+            </div>
+            <button id="controlsBackBtn" class="cyber-button small">BACK</button>
+        </div>
+
+        <!-- Character Select -->
+        <div id="characterSelect" class="screen">
+            <h2 class="cyber-title">SELECT CHARACTER</h2>
+            <div class="character-grid">
+                <div class="character-card" data-character="rynix"><div class="character-preview rynix-preview"></div><h3>RYNIX</h3><p>Balanced</p><p class="special-move">Photon Blade</p></div>
+                <div class="character-card" data-character="vexa"><div class="character-preview vexa-preview"></div><h3>VEXA</h3><p>Fast Ninja</p><p class="special-move">Cyber Dash</p></div>
+                <div class="character-card" data-character="drok"><div class="character-preview drok-preview"></div><h3>DROK</h3><p>Tank</p><p class="special-move">Core Smash</p></div>
+                <div class="character-card" data-character="zyra"><div class="character-preview zyra-preview"></div><h3>ZYRA</h3><p>Ranged Mage</p><p class="special-move">EMP Pulse</p></div>
+                <div class="character-card" data-character="kain"><div class="character-preview kain-preview"></div><h3>KAIN</h3><p>Trickster</p><p class="special-move">Echo Mirage</p></div>
+            </div>
+            <div id="playerSelectInfo"><p id="p1Select">Select Character</p></div>
+        </div>
+
+        <!-- Game Arena -->
+        <div id="gameArena" class="screen">
+            <div id="ui">
+                <div id="player1UI" class="player-ui">
+                    <div class="player-name">YOU</div>
+                    <div class="health-bar"><div id="p1Health" class="health-fill"></div></div>
+                    <div class="special-bar"><div id="p1Special" class="special-fill"></div></div>
+                    <div class="combo-counter">COMBO: <span id="p1Combo">0</span></div>
+                </div>
+                <div id="timer">99</div>
+                <div id="player2UI" class="player-ui">
+                    <div class="player-name">OPPONENT</div>
+                    <div class="health-bar"><div id="p2Health" class="health-fill"></div></div>
+                    <div class="special-bar"><div id="p2Special" class="special-fill"></div></div>
+                    <div class="combo-counter">COMBO: <span id="p2Combo">0</span></div>
+                </div>
+            </div>
+            <canvas id="gameCanvas"></canvas>
+            <div id="pauseMenu" class="hidden">
+                <h2>PAUSED</h2>
+                <button id="resumeBtn" class="cyber-button small">RESUME</button>
+                <button id="mainMenuBtn" class="cyber-button small">MAIN MENU</button>
+            </div>
+        </div>
+
+        <!-- Victory Screen -->
+        <div id="victoryScreen" class="screen">
+            <h1 id="winnerText" class="game-title"></h1>
+            <button id="rematchBtn" class="cyber-button">REMATCH</button>
+            <button id="victoryMenuBtn" class="cyber-button">MAIN MENU</button>
+        </div>
+    </div>
+
+    <script src="p2p-network.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
