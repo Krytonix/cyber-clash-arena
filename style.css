@@ -1,27 +1,16 @@
 /* 🎮 CYBER CLASH ARENA - ULTRA EPIC EDITION */
-
-/* === ROOT VARIABLES === */
 :root {
     --neon-blue: #00BFFF;
     --neon-cyan: #00FFFF;
     --neon-purple: #FF00FF;
-    --neon-orange: #FFA500;
-    --neon-red: #FF0066;
     --bg-primary: #0a0a0a;
-    --bg-secondary: #1a1a2e;
     --crt-glow: rgba(0, 191, 255, 0.15);
 }
 
-/* === BASE LAYERS === */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
     font-family: 'Orbitron', monospace;
-    background: radial-gradient(ellipse at center, var(--bg-secondary) 0%, #000 100%);
+    background: radial-gradient(ellipse at center, var(--bg-primary) 0%, #000 100%);
     color: #fff;
     overflow: hidden;
     height: 100vh;
@@ -29,35 +18,17 @@ body {
     perspective: 1000px;
 }
 
-/* === ADVANCED CRT EFFECT === */
+/* CRT Effect */
 #gameContainer::before {
     content: "";
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: 
-        repeating-linear-gradient(0deg, 
-            transparent, 
-            transparent 1px, 
-            var(--crt-glow) 1px, 
-            var(--crt-glow) 2px),
-        radial-gradient(circle at center, transparent 0%, #000 100%);
+    background: repeating-linear-gradient(0deg, transparent, transparent 1px, var(--crt-glow) 1px, var(--crt-glow) 2px), radial-gradient(circle at center, transparent 0%, #000 100%);
     pointer-events: none;
     z-index: 9999;
     animation: scanline 6s linear infinite;
     mix-blend-mode: screen;
-}
-
-#gameContainer::after {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: radial-gradient(ellipse, transparent 30%, var(--neon-blue) 250%);
-    opacity: 0.05;
-    pointer-events: none;
-    z-index: 9998;
-    animation: screenFlicker 0.15s infinite;
 }
 
 @keyframes scanline {
@@ -65,12 +36,7 @@ body {
     100% { transform: translateY(100vh); }
 }
 
-@keyframes screenFlicker {
-    0%, 100% { opacity: 0.05; }
-    50% { opacity: 0.08; }
-}
-
-/* === 3D TRANSFORMED SCREENS === */
+/* 3D Screens */
 .screen {
     position: absolute;
     width: 100%; height: 100%;
@@ -79,7 +45,6 @@ body {
     align-items: center;
     justify-content: center;
     transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .screen.active {
@@ -88,46 +53,21 @@ body {
 }
 
 @keyframes screenWarpIn {
-    0% {
-        opacity: 0;
-        transform: scale(1.3) rotateX(15deg) translateZ(-200px);
-        filter: blur(20px) brightness(3);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) rotateX(0) translateZ(0);
-        filter: blur(0) brightness(1);
-    }
+    0% { opacity: 0; transform: scale(1.3) rotateX(15deg) translateZ(-200px); filter: blur(20px) brightness(3); }
+    100% { opacity: 1; transform: scale(1) rotateX(0) translateZ(0); filter: blur(0) brightness(1); }
 }
 
-/* === HOLOGRAPHIC GAME TITLE === */
+/* Holographic Title */
 .game-title {
     font-size: 5rem;
     font-weight: 900;
     margin-bottom: 3rem;
-    text-align: center;
-    background: 
-        linear-gradient(45deg, 
-            var(--neon-blue), 
-            var(--neon-cyan), 
-            var(--neon-purple), 
-            var(--neon-orange), 
-            var(--neon-blue));
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-cyan), var(--neon-purple), #FFA500, var(--neon-blue));
     background-size: 500% 500%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: 
-        gradientShift 4s ease infinite,
-        glitchEffect 3s infinite,
-        titleFloat 3s ease-in-out infinite;
-    position: relative;
-    transform-style: preserve-3d;
+    animation: gradientShift 4s ease infinite, glitchEffect 3s infinite, titleFloat 3s ease-in-out infinite;
     letter-spacing: 3px;
-}
-
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
 }
 
 @keyframes titleFloat {
@@ -139,66 +79,22 @@ body {
     0%, 92%, 100% { transform: translate(0); }
     1% { transform: translate(-2px, 2px) skew(1deg); }
     2% { transform: translate(2px, -2px) skew(-1deg); }
-    3% { transform: translate(-1px, 1px); }
 }
 
-.game-title::before,
-.game-title::after {
-    content: "CYBER CLASH ARENA";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background: inherit;
-    opacity: 0.7;
-}
-
-.game-title::before {
-    animation: glitchRed 0.3s infinite;
-    z-index: -1;
-}
-
-.game-title::after {
-    animation: glitchCyan 0.3s infinite;
-    z-index: -2;
-}
-
-@keyframes glitchRed {
-    0% { clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%); transform: translate(-2px, -2px); filter: hue-rotate(90deg); }
-    100% { clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%); transform: translate(2px, 2px); filter: hue-rotate(90deg); }
-}
-
-@keyframes glitchCyan {
-    0% { clip-path: polygon(0 15%, 100% 15%, 100% 25%, 0 25%); transform: translate(1px, 0); filter: hue-rotate(-90deg); }
-    100% { clip-path: polygon(0 75%, 100% 75%, 100% 85%, 0 85%); transform: translate(-1px, 0); filter: hue-rotate(-90deg); }
-}
-
-/* === ENHANCED CYBER BUTTONS === */
+/* Epic Buttons */
 .cyber-button {
     font-family: 'Orbitron', monospace;
     font-size: 1.6rem;
     font-weight: 900;
     padding: 1.2rem 3.5rem;
-    background: 
-        linear-gradient(135deg, 
-            transparent 0%, 
-            rgba(0, 191, 255, 0.1) 50%, 
-            transparent 100%);
+    background: linear-gradient(135deg, transparent 0%, rgba(0, 191, 255, 0.1) 50%, transparent 100%);
     color: var(--neon-blue);
     border: 3px solid var(--neon-blue);
     cursor: pointer;
     position: relative;
-    overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-shadow: 
-        0 0 10px var(--neon-blue),
-        0 0 20px var(--neon-blue);
-    box-shadow: 
-        0 0 20px var(--neon-blue),
-        inset 0 0 20px rgba(0, 191, 255, 0);
-    transform-style: preserve-3d;
-    perspective: 1000px;
+    text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+    box-shadow: 0 0 20px var(--neon-blue), inset 0 0 20px rgba(0, 191, 255, 0);
     letter-spacing: 2px;
     animation: buttonIdleGlow 2s infinite alternate;
 }
@@ -208,54 +104,18 @@ body {
     100% { box-shadow: 0 0 30px var(--neon-blue), 0 0 40px var(--neon-cyan); }
 }
 
-.cyber-button::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(0, 191, 255, 0.4), 
-        transparent);
-    transition: left 0.6s;
-}
-
-.cyber-button:hover::before {
-    left: 100%;
-    animation: buttonShine 0.6s ease-out;
-}
-
-@keyframes buttonShine {
-    0% { left: -100%; }
-    100% { left: 100%; }
-}
-
 .cyber-button:hover {
-    background: rgba(0, 191, 255, 0.15);
-    color: #fff;
-    transform: 
-        translateY(-8px)
-        rotateX(8deg)
-        scale(1.08);
-    box-shadow: 
-        0 0 50px var(--neon-blue),
-        0 15px 40px rgba(0, 191, 255, 0.4);
+    transform: translateY(-8px) rotateX(8deg) scale(1.08);
+    box-shadow: 0 0 50px var(--neon-blue), 0 15px 40px rgba(0, 191, 255, 0.4);
     border-color: var(--neon-cyan);
     animation: none;
 }
 
-.cyber-button:active {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 0 25px var(--neon-blue);
-    transition: all 0.1s;
-}
-
-/* === HOLOGRAPHIC CHARACTER CARDS === */
+/* Holographic Cards */
 .character-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1.5rem;
-    margin-bottom: 2rem;
     max-width: 1200px;
     padding: 0 2rem;
     perspective: 800px;
@@ -264,18 +124,10 @@ body {
 .character-card {
     border: 3px solid var(--neon-blue);
     padding: 1.5rem;
-    text-align: center;
+    background: linear-gradient(135deg, rgba(0, 191, 255, 0.05) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 191, 255, 0.05) 100%);
+    border-radius: 15px;
     cursor: pointer;
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background: 
-        linear-gradient(135deg, 
-            rgba(0, 191, 255, 0.05) 0%, 
-            rgba(0, 0, 0, 0.3) 50%,
-            rgba(0, 191, 255, 0.05) 100%);
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    transform-style: preserve-3d;
     animation: cardFloat 4s ease-in-out infinite;
 }
 
@@ -284,128 +136,28 @@ body {
     50% { transform: translateY(-5px) rotateY(2deg); }
 }
 
-.character-card::before {
-    content: "";
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle, var(--neon-cyan) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    transform: rotate(45deg);
-    filter: blur(20px);
-}
-
-.character-card:hover::before {
-    opacity: 0.3;
-    animation: hologramPulse 0.8s ease-out;
-}
-
-@keyframes hologramPulse {
-    0% { transform: rotate(45deg) scale(0); opacity: 0; }
-    50% { transform: rotate(45deg) scale(1.5); opacity: 0.4; }
-    100% { transform: rotate(45deg) scale(2); opacity: 0; }
-}
-
 .character-card:hover {
-    transform: 
-        translateY(-15px)
-        scale(1.12)
-        rotateY(10deg)
-        rotateX(5deg);
-    box-shadow: 
-        0 20px 50px rgba(0, 191, 255, 0.6),
-        0 0 60px var(--neon-blue);
-    border-color: var(--neon-cyan);
-    border-width: 4px;
+    transform: translateY(-15px) scale(1.12) rotateY(10deg) rotateX(5deg);
+    box-shadow: 0 20px 50px rgba(0, 191, 255, 0.6), 0 0 60px var(--neon-blue);
 }
 
-.character-card.selected-p1,
-.character-card.selected-p2 {
-    border-width: 4px;
-    animation: selectedPulse 1.2s infinite;
-}
-
-@keyframes selectedPulse {
-    0%, 100% { 
-        box-shadow: 
-            0 0 30px var(--neon-blue),
-            inset 0 0 30px rgba(0, 191, 255, 0.2);
-    }
-    50% { 
-        box-shadow: 
-            0 0 60px var(--neon-cyan),
-            inset 0 0 40px rgba(0, 255, 255, 0.4);
-    }
-}
-
-/* === CHARACTER PREVIEW - GLASS EFFECT === */
-.character-preview {
-    width: 90px; height: 90px;
-    margin: 0 auto 1rem;
-    border-radius: 15px;
-    transition: all 0.4s;
-    position: relative;
-    overflow: hidden;
-    border: 2px solid rgba(0, 191, 255, 0.3);
-    background: rgba(0, 0, 0, 0.3);
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-.character-preview::after {
-    content: "";
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transform: rotate(45deg);
-    filter: blur(10px);
-}
-
-.character-card:hover .character-preview::after {
-    animation: previewShimmer 0.6s ease-in-out;
-}
-
-@keyframes previewShimmer {
-    0% { transform: rotate(45deg) translateX(-150%); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: rotate(45deg) translateX(150%); opacity: 0; }
-}
-
-/* === LIQUID HEALTH BARS === */
+/* Liquid Health Bars */
 .health-bar, .special-bar {
     width: 100%; height: 22px;
     background: rgba(0, 0, 0, 0.7);
     border: 3px solid var(--neon-blue);
-    margin-bottom: 0.8rem;
-    position: relative;
-    overflow: hidden;
     border-radius: 15px;
+    overflow: hidden;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
-.health-fill, .special-fill {
-    height: 100%;
-    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    border-radius: 12px;
-}
-
 .health-fill {
-    background: 
-        linear-gradient(90deg, 
-            var(--neon-blue), 
-            var(--neon-cyan), 
-            #fff);
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan), #fff);
     box-shadow: 0 0 15px var(--neon-blue);
 }
 
 .special-fill {
-    background: 
-        linear-gradient(90deg, 
-            #0080FF, 
-            var(--neon-blue), 
-            var(--neon-cyan));
+    background: linear-gradient(90deg, #0080FF, var(--neon-blue), var(--neon-cyan));
     box-shadow: 0 0 15px #0080FF;
 }
 
@@ -423,23 +175,18 @@ body {
     100% { left: 100%; }
 }
 
-/* === ENHANCED TIMER === */
+/* Timer */
 #timer {
     font-size: 4.5rem;
     font-weight: 900;
     color: var(--neon-blue);
-    text-shadow: 
-        0 0 20px var(--neon-blue),
-        0 0 40px var(--neon-cyan);
-    animation: 
-        timerPulse 1s infinite alternate,
-        timerShake 0.1s infinite;
+    text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-cyan);
+    animation: timerPulse 1s infinite alternate, timerShake 0.1s infinite;
     letter-spacing: 10px;
     background: rgba(0, 0, 0, 0.5);
     padding: 0 2rem;
     border-radius: 15px;
     border: 3px solid var(--neon-blue);
-    backdrop-filter: blur(20px);
 }
 
 @keyframes timerPulse {
@@ -447,104 +194,4 @@ body {
     100% { transform: scale(1.15); box-shadow: 0 0 60px var(--neon-cyan); }
 }
 
-@keyframes timerShake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-1px); }
-    75% { transform: translateX(1px); }
-}
-
-/* === COMBO COUNTER - EXPLOSIVE === */
-.combo-counter {
-    font-size: 1.2rem;
-    color: var(--neon-orange);
-    text-shadow: 
-        0 0 10px var(--neon-orange),
-        0 0 20px #FF4500;
-    font-weight: 900;
-    animation: comboFlash 0.3s ease-out;
-}
-
-@keyframes comboFlash {
-    0% { transform: scale(1.5); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-/* === PAUSE MENU - FROSTED GLASS === */
-#pauseMenu {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    text-align: center;
-    background: rgba(0, 0, 0, 0.85);
-    padding: 3rem 4rem;
-    border: 4px solid var(--neon-blue);
-    border-radius: 25px;
-    box-shadow: 
-        0 0 60px var(--neon-blue),
-        0 0 100px rgba(0, 191, 255, 0.3),
-        inset 0 0 40px rgba(0, 191, 255, 0.1);
-    backdrop-filter: blur(30px);
-    animation: pauseScale 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    z-index: 10000;
-}
-
-@keyframes pauseScale {
-    to { transform: translate(-50%, -50%) scale(1.05); }
-}
-
-/* === VICTORY SCREEN - CINEMATIC === */
-#victoryScreen {
-    background: radial-gradient(ellipse at center, #0a2a0a 0%, #000 70%);
-    animation: victoryFlash 0.8s ease-out;
-}
-
-.victoryFlash {
-    animation: screenFlash 0.5s;
-}
-
-@keyframes screenFlash {
-    0% { filter: brightness(5) contrast(2); }
-    100% { filter: brightness(1) contrast(1); }
-}
-
-#winnerText {
-    font-size: 4rem;
-    background: linear-gradient(45deg, #FFD700, #FFA500, #FF6347, #FFD700);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: 
-        victoryGlow 2s infinite alternate,
-        gradientShift 3s ease infinite;
-}
-
-@keyframes victoryGlow {
-    0% { text-shadow: 0 0 30px #FFD700; }
-    100% { text-shadow: 0 0 80px #FFA500, 0 0 120px #FF6347; }
-}
-
-/* === DYNAMIC BACKGROUND PARTICLES === */
-#gameCanvas {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: 
-        radial-gradient(circle at 20% 50%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-        linear-gradient(to bottom, #000, #0a0a2a),
-        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.5" fill="%2300BFFF" opacity="0.3"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/><animate attributeName="r" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/></circle><circle cx="30" cy="70" r="0.8" fill="%2300FFFF" opacity="0.4"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="4s" repeatCount="indefinite"/></circle><circle cx="80" cy="40" r="0.6" fill="%23FF00FF" opacity="0.2"><animate attributeName="opacity" values="0.2;0.7;0.2" dur="2.5s" repeatCount="indefinite"/></circle></svg>');
-    filter: contrast(1.3) brightness(1.1);
-}
-
-/* === RESPONSIVE 3D SCALING === */
-@media (max-width: 1024px) {
-    .game-title { font-size: 3.5rem; }
-    .character-grid { grid-template-columns: repeat(3, 1fr); }
-    .cyber-button { font-size: 1.3rem; padding: 1rem 2.5rem; }
-}
-
-@media (max-width: 768px) {
-    .game-title { font-size: 2.5rem; }
-    .character-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-    .cyber-button { font-size: 1.1rem; padding: 0.8rem 2rem; }
-}
+.hidden { display: none !important; }
