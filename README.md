@@ -2,31 +2,29 @@
 
 A high-performance 2D browser-based fighting game with cyberpunk aesthetics and real-time multiplayer support.
 
-![Game Preview](https://img.shields.io/badge/60%20FPS-✓-brightgreen)
-![Multiplayer](https://img.shields.io/badge/2%20Player-✓-blue)
-![Open Source](https://img.shields.io/badge/MIT%20License-✓-orange)
-
 ## 🎮 Features
+- Local & Online P2P multiplayer
+- 5 unique characters
+- Epic neon visual effects
+- 60 FPS gameplay
+- No installation required
 
-- **⚔️ 5 Unique Characters**: Rynix, Vexa, Drok, Zyra, Kain
-- **🎨 Epic Visuals**: CRT monitor effects, neon glows, glitch animations
-- **🔊 Sound Ready**: Placeholder audio system (add your own sfx)
-- **📶 Multiplayer Modes**:
-  - Local (same keyboard)
-  - P2P (browser-to-browser, same WiFi)
-  - Dedicated Server (internet-wide)
-- **📱 Responsive**: Works on any desktop screen
-- **⚡ 60 FPS**: Optimized game loop with requestAnimationFrame
+## 🚀 How to Play
+1. **Local**: Open `index.html` → Click "Local Game" → Select character
+2. **Online P2P**: Click "Online Game" → Host/Join with code
 
-## 🚀 Quick Start
+## 🕹️ Controls
+**Player 1**: WASD (move), F (attack), G (special), SPACE (block)  
+**Player 2**: Arrow Keys (move), , (attack), . (special), ENTER (block)
 
-### Play Instantly (No Setup)
-1. Open `index.html` in any modern browser
-2. Click "Local Game" for offline play
-3. Or "Online Game" for P2P multiplayer
+## 🌐 GitHub Pages Deployment
+1. Create GitHub repo
+2. Upload all files
+3. Settings → Pages → Enable
+4. Game live at `https://your-username.github.io/cyber-clash-arena/`
 
-### Deploy to GitHub Pages (1-Minute Setup)
+## 🛠️ Development
 ```bash
-# 1. Create repository on GitHub
-# 2. Upload all files
-# 3. Settings → Pages → Enable
+# For server mode
+npm install
+node server.js
