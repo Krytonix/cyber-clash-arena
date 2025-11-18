@@ -1,4 +1,4 @@
-{class P2PNetwork {
+class P2PNetwork {
     constructor() {
         this.localConnection = null;
         this.dataChannel = null;
@@ -22,7 +22,6 @@
 
         const offer = await this.localConnection.createOffer();
         await this.localConnection.setLocalDescription(offer);
-
         return btoa(JSON.stringify(offer));
     }
 
@@ -42,7 +41,6 @@
 
         const answer = await this.remoteConnection.createAnswer();
         await this.remoteConnection.setLocalDescription(answer);
-
         prompt('Give this answer to host:', btoa(JSON.stringify(answer)));
         this.connected = true;
         return answer;
@@ -55,9 +53,7 @@
 
     setupConnection(conn) {
         conn.onicecandidate = (event) => {
-            if (event.candidate) {
-                console.log('ICE candidate:', event.candidate);
-            }
+            if (event.candidate) console.log('ICE candidate:', event.candidate);
         };
         conn.oniceconnectionstatechange = () => {
             console.log('Connection state:', conn.iceConnectionState);
@@ -86,4 +82,3 @@
 }
 
 window.P2PNetwork = P2PNetwork;
-}
