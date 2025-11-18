@@ -1,6 +1,5 @@
 const WebSocket = require('ws');
 const http = require('http');
-
 const PORT = 8080;
 const rooms = new Map();
 const players = new Map();
